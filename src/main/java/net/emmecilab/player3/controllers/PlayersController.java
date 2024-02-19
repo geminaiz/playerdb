@@ -19,7 +19,7 @@ public class PlayersController {
 
     //TODO: refatoring of all mappingß
     @CrossOrigin(origins = "*", maxAge = 3600)
-    @GetMapping("/players")
+    @GetMapping("/getAllPlayers")
     public ResponseEntity<?> getAllPlayers() {
         List<PlayerModel> playerModelList = playerService.getAllPlayers();
         if(!playerModelList.isEmpty()) {
@@ -28,7 +28,7 @@ public class PlayersController {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
     }
 
-    @GetMapping("/players/{id}")
+    @GetMapping("/findPlayer}")
     @CrossOrigin(origins = "*", maxAge = 3600)
     public ResponseEntity<?> getPlayer(@RequestParam Long id) {
         if (id != null){
@@ -39,7 +39,7 @@ public class PlayersController {
     }
 
     @CrossOrigin(origins = "*", maxAge = 3600)
-    @PostMapping("/post")
+    @PostMapping("/addPlayer")
     public ResponseEntity<?> addPlayer(@RequestBody PlayerModel player) {
         PlayerModel playerModel = playerService.addPlayer(player); // prima fa le operazioni di destra dopo salva il risultato in quello di sinistra rispetto "="
         if(playerModel != null) {
