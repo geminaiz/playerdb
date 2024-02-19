@@ -1,31 +1,27 @@
 package net.emmecilab.player3.models;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name="player")
-public class Player {
+public class PlayerModel {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    @Column(name = "first_name")
     private String firstName;
+    @Column(name = "last_name")
+
     private String lastName;
+    @Column(name = "team")
+
     private String team;
+    @Column(name = "fi")
+
     private String position;
 
-    public Player() {
-    }
-
-    public Player(Long id, String firstName, String lastName, String team, String position) {
-        this.id = id;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.team = team;
-        this.position = position;
+    public PlayerModel() {
     }
 
     public Long getId() {
@@ -67,5 +63,4 @@ public class Player {
     public void setPosition(String position) {
         this.position = position;
     }
-
 }

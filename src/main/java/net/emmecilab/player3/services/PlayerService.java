@@ -1,22 +1,42 @@
 package net.emmecilab.player3.services;
 
+import net.emmecilab.player3.repositories.PlayerRepository;
 import java.util.List;
-import net.emmecilab.player3.models.Player;
+import java.util.Optional;
+import net.emmecilab.player3.models.PlayerModel;
+import org.springframework.beans.factory.annotation.Autowired;
 
-/**
- *
- * @author Mauro Cicolella
- */
-public interface PlayerService {
+import org.springframework.stereotype.Service;
 
-    public List<Player> getAllPlayers();
+@Service
+public class PlayerService {
 
-    public Player getPlayer(Long id);
+    @Autowired
+    private PlayerRepository playerRepository;
 
-    public void addPlayer(Player player);
+    public List<PlayerModel> getAllPlayers() {
+        return playerRepository.findAll();
+    }
 
-    public void updatePlayer(Long id, Player player);
+    public PlayerModel getPlayer(Long id) {
+        Optional<PlayerModel> player = this.playerRepository.findById(id);
+        if (player.isPresent()) {
+            return player.get();
+        } else {
+            return null;
+        }
+    }
 
-    public void deletePlayer(Long id);
+    public void addPlayer(PlayerModel player) {
+        playerRepository.save(player);
+    }
 
+
+    public void deletePlayer(Long id) {
+        playerRepository.deleteById(id);
+    }
+
+    public PlayerModel edit(PlayerModel playerModel) {
+        return playerRepository.save(playerModel);
+    }
 }
