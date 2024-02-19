@@ -19,24 +19,19 @@ public class PlayerService {
     }
 
     public PlayerModel getPlayer(Long id) {
-        Optional<PlayerModel> player = this.playerRepository.findById(id);
-        if (player.isPresent()) {
-            return player.get();
-        } else {
-            return null;
+        Optional<PlayerModel> playerOptional = playerRepository.findById(id);
+        if (playerOptional.isPresent()){
+            return playerOptional.get();
         }
+        return null;
     }
 
-    public void addPlayer(PlayerModel player) {
-        playerRepository.save(player);
+    public PlayerModel addPlayer(PlayerModel playerModel) { return playerRepository.save(playerModel);
     }
-
 
     public void deletePlayer(Long id) {
         playerRepository.deleteById(id);
     }
 
-    public PlayerModel edit(PlayerModel playerModel) {
-        return playerRepository.save(playerModel);
-    }
+    public PlayerModel edit(PlayerModel playerModel) { return playerRepository.save(playerModel); }
 }
